@@ -7,42 +7,42 @@
 - id – идентификатор пользователя (SERIAL PRIMARY KEY).
 - auth_token – токен пользователя (TEXT NOT NULL).
 Таблица links – хранит данные о коротких ссылках:
-id – идентификатор ссылки (SERIAL PRIMARY KEY).
-client_id – идентификатор пользователя (INTEGER).
-long_link – оригинальная ссылка (VARCHAR(255) NOT NULL).
-short_link – короткая ссылка (VARCHAR(255) NOT NULL).
-created_at – дата создания (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
-expires_at – дата истечения (TIMESTAMP).
-sign_up_create_account – флаг авторизованного пользователя (BOOLEAN DEFAULT FALSE).
+- id – идентификатор ссылки (SERIAL PRIMARY KEY).
+- client_id – идентификатор пользователя (INTEGER).
+- long_link – оригинальная ссылка (VARCHAR(255) NOT NULL).
+- short_link – короткая ссылка (VARCHAR(255) NOT NULL).
+- created_at – дата создания (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
+- expires_at – дата истечения (TIMESTAMP).
+- sign_up_create_account – флаг авторизованного пользователя (BOOLEAN DEFAULT FALSE).
 ## Таблица statistics – хранит статистику переходов по ссылкам:
-id – идентификатор записи (SERIAL PRIMARY KEY).
-short_link – короткая ссылка (VARCHAR(255) NOT NULL).
-access_date – дата доступа (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
+- id – идентификатор записи (SERIAL PRIMARY KEY).
+- short_link – короткая ссылка (VARCHAR(255) NOT NULL).
+- access_date – дата доступа (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
 Таблица expired_links – хранит просроченные ссылки:
-id – идентификатор (SERIAL PRIMARY KEY).
-client_id – идентификатор пользователя (INTEGER).
-long_link – полная ссылка (VARCHAR(255) NOT NULL).
-short_link – короткая ссылка (VARCHAR(255) NOT NULL).
-created_at – дата создания (TIMESTAMP).
-expires_at – дата истечения (TIMESTAMP).
-deleted_at – дата удаления (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
-sign_up_create_account_d – флаг авторизованного пользователя (BOOLEAN DEFAULT FALSE).
+- id – идентификатор (SERIAL PRIMARY KEY).
+- client_id – идентификатор пользователя (INTEGER).
+- long_link – полная ссылка (VARCHAR(255) NOT NULL).
+- short_link – короткая ссылка (VARCHAR(255) NOT NULL).
+- created_at – дата создания (TIMESTAMP).
+- expires_at – дата истечения (TIMESTAMP).
+- deleted_at – дата удаления (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
+- sign_up_create_account_d – флаг авторизованного пользователя (BOOLEAN DEFAULT FALSE).
 ## Основные методы работы с БД
 ## Регистрация и проверка пользователей
-get_user_by_credentials(client_id, auth_token): проверка пользователя по ID и токену.
+- get_user_by_credentials(client_id, auth_token): проверка пользователя по ID и токену.
 ## Работа с короткими ссылками
-store_link(long_link, short_link, client_id, is_authorized, expires_at): создание ссылки.
-search_at_the_source_url_short_link(short_url): получение оригинальной ссылки по короткому идентификатору.
-client_created_shortcut(short_url): получение ID пользователя, создавшего ссылку.
-removes_short_reference_database(short_url): удаление короткой ссылки.
-method_updates_source_link(short_link, long_link): обновление оригинальной ссылки.
-return_date_created_short_link(short_link): получение даты создания короткой ссылки.
+- store_link(long_link, short_link, client_id, is_authorized, expires_at): создание ссылки.
+- search_at_the_source_url_short_link(short_url): получение оригинальной ссылки по короткому идентификатору.
+- client_created_shortcut(short_url): получение ID пользователя, создавшего ссылку.
+- removes_short_reference_database(short_url): удаление короткой ссылки.
+- method_updates_source_link(short_link, long_link): обновление оригинальной ссылки.
+- return_date_created_short_link(short_link): получение даты создания короткой ссылки.
 ## Статистика и аналитика
-saves_short_link_access_statistics_table(short_url): сохранение информации о переходе.
-return_statistics_short_link(short_url): получение статистики (количество переходов, последнее использование).
-alias_availability_check(alias): проверка доступности алиаса.
-search_short_link_at_the_source_url(original_url): поиск короткой ссылки по оригинальной.
+- saves_short_link_access_statistics_table(short_url): сохранение информации о переходе.
+- return_statistics_short_link(short_url): получение статистики (количество переходов, последнее использование).
+- alias_availability_check(alias): проверка доступности алиаса.
+- search_short_link_at_the_source_url(original_url): поиск короткой ссылки по оригинальной.
 ## Очистка и управление ссылками
-purge_old_links(): перемещение просроченных ссылок в архив.
-return_all_links_users(client_id): получение количества активных и просроченных ссылок.
-pool_database_connection_close(): закрытие соединения с БД.
+- purge_old_links(): перемещение просроченных ссылок в архив.
+- return_all_links_users(client_id): получение количества активных и просроченных ссылок.
+- pool_database_connection_close(): закрытие соединения с БД.
