@@ -6,7 +6,7 @@
 ## Таблица users – хранит информацию о пользователях:
 - id – идентификатор пользователя (SERIAL PRIMARY KEY).
 - auth_token – токен пользователя (TEXT NOT NULL).
-Таблица links – хранит данные о коротких ссылках:
+## Таблица links – хранит данные о коротких ссылках:
 - id – идентификатор ссылки (SERIAL PRIMARY KEY).
 - client_id – идентификатор пользователя (INTEGER).
 - long_link – оригинальная ссылка (VARCHAR(255) NOT NULL).
@@ -18,7 +18,7 @@
 - id – идентификатор записи (SERIAL PRIMARY KEY).
 - short_link – короткая ссылка (VARCHAR(255) NOT NULL).
 - access_date – дата доступа (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
-Таблица expired_links – хранит просроченные ссылки:
+## Таблица expired_links – хранит просроченные ссылки:
 - id – идентификатор (SERIAL PRIMARY KEY).
 - client_id – идентификатор пользователя (INTEGER).
 - long_link – полная ссылка (VARCHAR(255) NOT NULL).
