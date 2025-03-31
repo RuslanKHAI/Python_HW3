@@ -52,12 +52,13 @@
 
   # Домашняя работа 4 (тесты)
 - Юнит-тесты (tests/unit/)
-│   │   ├── test_business_logic.py
-│   │   └── test_interact_postgres.py
+-- test_business_logic.py
+-- test_interact_postgres.py
 - Функциональные тесты (tests/functional/)
-│   │   ├── conftest.py
-│   │   ├── test_api.py
-- Нагрузочное тестирование (tests/load/locustfile.py)
+-- conftest.py
+-- test_api.py
+- Нагрузочное тестирование
+  --locustfile.py
 
 - requirements-test.txt
 
