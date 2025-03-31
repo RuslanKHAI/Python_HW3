@@ -27,7 +27,7 @@
 - created_at – дата создания (TIMESTAMP).
 - expires_at – дата истечения (TIMESTAMP).
 - deleted_at – дата удаления (TIMESTAMP DEFAULT CURRENT_TIMESTAMP).
-- sign_up_create_account_d – флаг авторизованного пользователя (BOOLEAN DEFAULT FALSE).
+- sign_up_create_account – флаг авторизованного пользователя (BOOLEAN DEFAULT FALSE).
 ## Основные методы работы с БД
 ## Регистрация и проверка пользователей
 - get_user_by_credentials(client_id, auth_token): проверка пользователя по ID и токену.
