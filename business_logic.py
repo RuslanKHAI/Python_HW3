@@ -128,9 +128,3 @@ class business_logic_shortlink:
         logging.info("Попали в сервисный класс")
         return await self.interact_postgres.short_link_search_at_the_source_url(original_url)
     
-    
-    
-    async def short_link_search_at_the_source_url(self, original_url: str) -> Optional[dict]:
-        logging.info("Попали в сервисный класс")
-        return await self.interact_postgres.short_link_search_at_the_source_url(original_url)
-    
