@@ -1,4 +1,4 @@
-# Python_HW3
+# Python API Домашняя работа 3
 # 1. Описание API
 Сервер поднял локально скрин экрана приложил![Localhost](https://github.com/user-attachments/assets/0d516a09-5ae2-4d7f-826b-93f2a53a9ba1)
 Деплой на сайте render.com. приложение по ссылке: https://python-hw3.onrender.com ![rendercom](https://github.com/user-attachments/assets/e6689412-c37c-4016-b3ef-00d212eeb7b5)
@@ -59,7 +59,7 @@
 │   │   ├── test_api.py
 - Нагрузочное тестирование (tests/load/locustfile.py)
 
-─ requirements-test.txt
+- requirements-test.txt
 
-запуск тестов: ![Test](https://github.com/user-attachments/assets/f2399f9a-52fb-4dc6-beed-1b2bb8f76aae)
+- запуск тестов: ![Test](https://github.com/user-attachments/assets/f2399f9a-52fb-4dc6-beed-1b2bb8f76aae)
 
