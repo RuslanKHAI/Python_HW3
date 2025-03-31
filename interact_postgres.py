@@ -22,7 +22,7 @@ class interact_postgreSQL_database:
     async def create_database(self):
         async with self.pool.acquire() as conn:
             for query in CREATE_TABLES_SQL:
-                await conn.execute
+                await conn.execute(query)
 
 
 #Поиск пользователя: 
@@ -37,12 +37,12 @@ class interact_postgreSQL_database:
                 return None
 
 #Работа с ссылками:Вставка данных о ссылке, Учет срока действия (expires_at) и пр.
-    async def store_link(self, long_link: str, short_link: str, client_id: int, is_authorized: bool, expires_at):
+    async def store_link(self, long_link: str, short_link: str, client_id: int, sign_up_create_account: bool, expires_at):
         async with self.pool.acquire() as conn:
             await conn.execute("""
-                INSERT INTO links (long_link, short_link, client_id, is_authorized, expires_at)
+                INSERT INTO links (long_link, short_link, client_id, sign_up_create_account, expires_at)
                 VALUES ($1, $2, $3, $4, $5)
-            """, long_link, short_link, client_id, is_authorized, expires_at)
+            """, long_link, short_link, client_id, sign_up_create_account, expires_at)
 
 #Работа с ссылками:
 # Быстрый поиск по индексируемому полю short_link
@@ -166,8 +166,8 @@ class interact_postgreSQL_database:
         async with self.pool.acquire() as conn:
             async with conn.transaction():
                 await conn.execute("""
-                    INSERT INTO expired_links (long_link, short_link, created_at, expires_at, client_id, is_authorized)
-                    SELECT long_link, short_link, created_at, expires_at, client_id, is_authorized
+                    INSERT INTO expired_links (long_link, short_link, created_at, expires_at, client_id, sign_up_create_account)
+                    SELECT long_link, short_link, created_at, expires_at, client_id, sign_up_create_account
                     FROM links
                     WHERE expires_at IS NOT NULL AND expires_at < CURRENT_TIMESTAMP
                 """)
