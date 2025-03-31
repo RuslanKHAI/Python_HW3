@@ -38,7 +38,7 @@ CREATE_TABLES_SQL = [
         created_at TIMESTAMP,
         expires_at TIMESTAMP,
         deleted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        sign_up_create_account_d BOOLEAN DEFAULT FALSE
+        sign_up_create_account BOOLEAN DEFAULT FALSE
     );
     """,
     """
