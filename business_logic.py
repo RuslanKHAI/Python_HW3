@@ -85,7 +85,7 @@ class business_logic_shortlink:
             return None
         
 
-    async def short_link_building(self, long_link: str, client_id: int = None, sign_up_create_account_d: bool = False, expires_at: Optional[datetime] = None) -> Optional[dict]:
+    async def short_link_building(self, long_link: str, client_id: int = None, sign_up_create_account: bool = False, expires_at: Optional[datetime] = None) -> Optional[dict]:
         symbols = string.ascii_letters + string.digits
         max_attempts = 50
         attempts = 0
@@ -100,7 +100,7 @@ class business_logic_shortlink:
         if attempts == max_attempts:
             return None
         
-        await self.interact_postgres.store_link(long_link, short_link, client_id, sign_up_create_account_d, expires_at)
+        await self.interact_postgres.store_link(long_link, short_link, client_id, sign_up_create_account, expires_at)
         
         return {
             "status_code": 201,
@@ -108,11 +108,11 @@ class business_logic_shortlink:
         }
     
     
-    async def generate_short_link_custom_alias(self, long_link: str, custom_alias: str, client_id: int = None, sign_up_create_account_d: bool = False, expires_at: Optional[datetime] = None) -> Optional[dict]:
+    async def generate_short_link_custom_alias(self, long_link: str, custom_alias: str, client_id: int = None, sign_up_create_account: bool = False, expires_at: Optional[datetime] = None) -> Optional[dict]:
         if await self.interact_postgres.search_at_the_source_url_short_link(custom_alias):
             raise HTTPException(status_code=400, detail="Alias already exists")
         
-        await self.interact_postgres.store_link(long_link, custom_alias, client_id, sign_up_create_account_d, expires_at)
+        await self.interact_postgres.store_link(long_link, custom_alias, client_id, sign_up_create_account, expires_at)
         
         return {
             "status_code": 201,
@@ -122,6 +122,12 @@ class business_logic_shortlink:
 
     async def return_all_links_users(self, client_id: int):
         return await self.interact_postgres.return_all_links_users(client_id)
+    
+    
+    async def short_link_search_at_the_source_url(self, original_url: str) -> Optional[dict]:
+        logging.info("Попали в сервисный класс")
+        return await self.interact_postgres.short_link_search_at_the_source_url(original_url)
+    
     
     
     async def short_link_search_at_the_source_url(self, original_url: str) -> Optional[dict]:
