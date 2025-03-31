@@ -1,10 +1,10 @@
 import os
 import logging
-import aioredis
+#import aioredis
+from redis import asyncio as redis
 import asyncio
 import redis.asyncio as redis
 import asyncpg
-import BackgroundScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -34,7 +34,7 @@ ipd = interact_postgreSQL_database(database_fastapi_url)   # подключае�
 business_logic = business_logic_shortlink(ipd)
 # создаем соединение с Redis.
 cache_url = os.environ.get('REDIS_URL', 'redis://localhost:6379')
-redis = aioredis.from_url(cache_url, decode_responses=True)
+redis = redis.from_url(cache_url, decode_responses=True)
 
 #1.on_event____________________________________________
 #Обработка событий при запуске и остановке приложения
@@ -74,10 +74,9 @@ async def lifespan(app: FastAPI):
     task_planner.shutdown()
     await ipd.pool_database_connection_close()
 
-# Создайте приложение с функцией lifespan
+# приложение с функцией lifespan
 fastapi_application = FastAPI(lifespan=lifespan)
 '''
-_____________________________________________________
 #код обрабатывает POST-запросы на создание коротких ссылок. 
 #беспечивает создание коротких ссылок как для авторизованных, 
 #так и для неавторизованных пользователей, с возможностью привязки 
